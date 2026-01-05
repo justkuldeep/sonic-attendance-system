@@ -20,6 +20,12 @@ app.get('/', (req, res) => {
   res.send('Antigravity Backend is Active');
 });
 
-app.listen(PORT, () => {
-  console.log(`Antigravity Server running on port ${PORT}`);
-});
+// Conditionally listen if not in Vercel environment
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`Antigravity Server running on port ${PORT}`);
+  });
+}
+
+// Export for Vercel
+module.exports = app;
